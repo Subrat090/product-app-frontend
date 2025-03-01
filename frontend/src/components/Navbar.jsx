@@ -6,9 +6,10 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    localStorage.removeItem("token");  // ✅ Ensure token is cleared
+    window.location.reload(); // ✅ Refresh the app to clear auth state
   };
+  
 
   return (
     <nav className="p-5 bg-gray-200 flex justify-between items-center">

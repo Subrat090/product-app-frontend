@@ -39,5 +39,13 @@ export const registerUser = async (userData) => {
 
 // User Login
 export const loginUser = async (userData) => {
-  return axios.post(`${API_URL}/api/auth/login`, userData).then(res => res.data);
+  try {
+    const response = await axios.post(`${API_URL}/api/auth/login`, userData);
+    localStorage.setItem("token", response.data.token); // ✅ Ensure token is stored correctly
+    return response.data;
+  } catch (error) {
+    console.error("Login failed:", error.response?.data?.message);
+    throw error;
+  }
 };
+
